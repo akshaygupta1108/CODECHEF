@@ -1,7 +1,7 @@
 import java.util.*;
 import java.lang.*;
 
-public class CHFINGS{
+class CHFINGS{
     public static void main(String args[]){
         Scanner scan = new Scanner(System.in);
         int test = scan.nextInt();
@@ -12,15 +12,21 @@ public class CHFINGS{
             System.out.println(result);
         }
     }
-    public static long solution(long num,long k){
+    public static long solution(long n,long k){
         long mod = 1000000007;
-        if(num >= k)
-            return k-1;
-        long  a = k;
-        long d = num-1;
-        long r = (a-2)%(d);
-        long second = (1 + (a-2)/d)%mod;
-        long first = (a + r)%mod;
-        return (first*second/2)%mod;
+        long s=(k-2)/(n-1);
+        s=(s+1)%mod;
+        long r=(k-2)%(n-1);
+        long f=(k+r)%mod;
+        long ans=(f*s)%mod;
+        ans=(ans*power(2,mod-2,mod))%mod;
+        return ans;
+    }
+    public static long power(long x,long y,long m) { 
+        if (y == 0) 
+            return 1; 
+        long p = power(x, y/2, m) % m; 
+        p = (p * p) % m; 
+        return (y%2 == 0)? p : (x * p) % m; 
     }
 }
